@@ -46,7 +46,6 @@ jobs:
         with:
           title: ${{ github.event.inputs.version }}
           labels: Release PR
-          base: ${{ env.TARGET_BRANCH }}
           branch: release-${{ github.event.inputs.version }}
           token: ${{ secrets.GITHUB }}
           delete-branch: true
