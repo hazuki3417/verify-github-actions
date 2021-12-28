@@ -15,14 +15,11 @@ jobs:
       - uses: actions/checkout@master
 
       - name: (Test) Make changes to the repository
-        run: npm install -g npm
+        run: npm install typescript
       
       - name: (Test) Check npm version
         run: npm -v
       
-      - name: (Test) Run npm audit fix
-        run: npm audit fix
-
       - name: Create a release pull request
         uses: peter-evans/create-pull-request@v3
         with:
