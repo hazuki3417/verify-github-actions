@@ -1,3 +1,4 @@
-console.log('hello world!')
-console.log('hello world!')
-console.log('hello world!')
+var str = 'hello world!'
+console.log(str)
+console.log(str)
+console.log(str)

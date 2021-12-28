@@ -28,6 +28,10 @@ jobs:
       - name: (Test) Check npm version
         run: npm -v
       
+        # ダミーの処理（ci/cdフロー内で変更がないとprが作成されないので、変更を無理やり作る）
+      - name: (Test) Add code
+        run: echo 'console.log(str)' >> index.js
+      
       # document: https://github.com/marketplace/actions/create-pull-request
       - name: Create a release pull request
         uses: peter-evans/create-pull-request@v3
