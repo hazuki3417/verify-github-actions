@@ -20,6 +20,7 @@ jobs:
       - name: (Test) Check npm version
         run: npm -v
       
+      # document: https://github.com/marketplace/actions/create-pull-request
       - name: Create a release pull request
         uses: peter-evans/create-pull-request@v3
         with:
@@ -27,3 +28,4 @@ jobs:
           labels: Auto PR
           branch: release
           token: ${{ secrets.GITHUB }}
+          delete-branch: true

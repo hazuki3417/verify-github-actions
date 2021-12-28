@@ -22,7 +22,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB }}
         with:
-          tag_name: ${{ github.event.pull_request.title }}
+          tag_name: ${{ v1.0.0 }}
           release_name: ${{ github.event.pull_request.title }}
           body: ${{ github.event.pull_request.body }}
           draft: false
