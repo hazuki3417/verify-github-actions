@@ -3,9 +3,11 @@ name: Create Release
 # release のPRがマージされてクローズされたときに動く
 
 on:
-  push:
+  pull_request:
     branches: [main]
-    # types: [closed]
+    types: [closed]
+  # https://qiita.com/okazy/items/7ab46f2c20ec341a2836
+  # PRがマージされたときにワークフローを実行
 
 jobs:
   build:
