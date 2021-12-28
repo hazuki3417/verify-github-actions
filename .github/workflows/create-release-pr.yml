@@ -15,7 +15,7 @@ jobs:
       - uses: actions/checkout@master
 
       - name: (Test) Make changes to the repository
-        run: npm install typescript
+        run: npm install typescript webpack
       
       - name: (Test) Check npm version
         run: npm -v
