@@ -12,15 +12,16 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@master
 
       - name: (Test) Make changes to the repository
-
-      - run: npm install -g npm
+        run: npm install -g npm
       
-      - run: npm -v
+      - name: (Test) Check npm version
+        run: npm -v
       
-      - run: npm audit fix
+      - name: (Test) Run npm audit fix
+        run: npm audit fix
 
       - name: Create a release pull request
         uses: peter-evans/create-pull-request@v3
