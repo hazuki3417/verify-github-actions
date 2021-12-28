@@ -1,22 +1,30 @@
 name: Create a release pull request
 
 on:
-  # pull_request:
-  #   types: [closed]
-  #   branches:
-  #     - master
   workflow_dispatch:
+    inputs:
+      version:
+        description: 'version'
+        required: true
 
 jobs:
   create-release-pr:
     runs-on: ubuntu-latest
 
     steps:
+        # セマンティックバージョンのフォーマット検証（簡易版）
+        # 厳密なものは下記のサイトの正規表現で行うこと
+        # https://semver.org/
+      - name: Verify version pattern
+        run:  echo "${{ github.event.inputs.version }}" | grep -e ^\[0-9\]\\+.\[0-9\]\\+.\[0-9\]\\+$
+
       - uses: actions/checkout@master
 
+        # ダミーの処理
       - name: (Test) Make changes to the repository
         run: npm install typescript webpack
       
+        # ダミーの処理
       - name: (Test) Check npm version
         run: npm -v
       
@@ -25,8 +33,8 @@ jobs:
         uses: peter-evans/create-pull-request@v3
         with:
           title: pull request create test
-          labels: Auto PR
-          branch: release
+          labels: Release PR
+          branch: release-${{ github.event.inputs.version }}
           token: ${{ secrets.GITHUB }}
           delete-branch: true
         # 変更がないとブランチは作成されないので注意
