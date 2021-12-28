@@ -1,4 +1,4 @@
-name: Create a release pull request
+name: Create release pull request
 
 on:
   workflow_dispatch:
@@ -48,6 +48,4 @@ jobs:
           token: ${{ secrets.GITHUB }}
           delete-branch: true
         # 変更がないとブランチは作成されないので注意
-        # workflow dispatchで値を受け入れることができるので、そこでバージョン指定しても良さそう
-
         # このブランチがクローズ（却下されたときの処理も作成する）
