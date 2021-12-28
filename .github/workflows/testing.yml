@@ -1,10 +1,11 @@
 name: Testing
 
 on:
-  # NOTE: PR作成 or pus or mergeしたときに実行
-  #       基本的に変更が発生したときはテストを実行する
+  # NOTE: feature*実装ブランチ
+  #      変更が発生したときは常にテストを実行する
   push:
-    branches: [main, develop, 'release*', 'feature*']
+    branches: ['feature*']
+  # NOTE: PR作成時は常にテストを実行する
   pull_request:
     branches: [main, develop, 'release*', 'feature*']
   workflow_dispatch:
