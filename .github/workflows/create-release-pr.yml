@@ -1,0 +1,31 @@
+name: Create a release pull request
+
+on:
+  # pull_request:
+  #   types: [closed]
+  #   branches:
+  #     - master
+  workflow_dispatch:
+
+jobs:
+  create-release-pr:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: (Test) Make changes to the repository
+
+      - run: npm install -g npm
+      
+      - run: npm -v
+      
+      - run: npm audit fix
+
+      - name: Create a release pull request
+        uses: peter-evans/create-pull-request@v3
+        with:
+          title: pull request create test
+          labels: Auto PR
+          branch: release
+          token: ${{ secrets.GITHUB }}
