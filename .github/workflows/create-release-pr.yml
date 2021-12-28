@@ -10,6 +10,8 @@ on:
 jobs:
   create-release-pr:
     runs-on: ubuntu-latest
+    env:
+      WORK_BRANCH: develop
 
     steps:
         # セマンティックバージョンのフォーマット検証（簡易版）
@@ -18,7 +20,9 @@ jobs:
       - name: Verify semver
         run:  echo "${{ github.event.inputs.version }}" | grep -e ^\[0-9\]\\+.\[0-9\]\\+.\[0-9\]\\+$
 
-      - uses: actions/checkout@master
+      - uses: actions/checkout@v2
+        with:
+          ref: ${{ env.WORK_BRANCH }}
 
         # ダミーの処理
       - name: (Test) Make changes to the repository
@@ -38,6 +42,7 @@ jobs:
         with:
           title: ${{ github.event.inputs.version }}
           labels: Release PR
+          base: ${{ env.WORK_BRANCH }}
           branch: release-${{ github.event.inputs.version }}
           token: ${{ secrets.GITHUB }}
           delete-branch: true
