@@ -15,7 +15,7 @@ jobs:
         # セマンティックバージョンのフォーマット検証（簡易版）
         # 厳密なものは下記のサイトの正規表現で行うこと
         # https://semver.org/
-      - name: Verify version pattern
+      - name: Verify semver
         run:  echo "${{ github.event.inputs.version }}" | grep -e ^\[0-9\]\\+.\[0-9\]\\+.\[0-9\]\\+$
 
       - uses: actions/checkout@master
