@@ -63,4 +63,4 @@ jobs:
         run: make login-ghcr
 
       - name: Push Docker Hub Registry
-        run: make push-ghcr -e RELEASE_VERSION=${{ github.event.inputs.version }}
+        run: make push-ghcr -e RELEASE_VERSION=${{ github.event.inputs.version }} GITHUB_TOKEN=${{ secrets.GITHUB }}

@@ -46,7 +46,7 @@ set-tag-ghcr:
 	docker tag ${IMAGE_NAME} ${IMAGE_NAME_VERSION_FOR_GHCR}
 
 login-ghcr:
-	@echo ${GITHUB_TOKEN} | docker login ghcr.io -u ${GITHUB_USER} --password-stdin
+	echo ${GITHUB_TOKEN} | docker login ghcr.io -u ${GITHUB_USER} --password-stdin
 
 # 最も最新のものが先頭に表示されるので、latest imageは最後のpushする
 push-ghcr:
