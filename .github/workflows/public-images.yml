@@ -1,0 +1,38 @@
+name: Public Images
+
+# NOTE: docker imageを公開するworkflow
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'version'
+        required: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      BASE_BRANCH: main
+
+    steps:
+        # セマンティックバージョンのフォーマット検証（簡易版）
+        # 厳密なものは下記のサイトの正規表現で行うこと
+        # https://semver.org/
+      - name: Verify semver
+        run:  echo "${{ github.event.inputs.version }}" | grep -e ^\[0-9\]\\+.\[0-9\]\\+.\[0-9\]\\+$
+
+      - uses: actions/checkout@v2
+        with:
+          ref: ${{ env.BASE_BRANCH }}
+
+      - name: Build images
+        run: make build
+
+      - name: Set image tag
+        run: make set-tag
+
+      - name: Login Docker Hub
+        run: make login-dh
+
+      - name: Push Docker Hub Registry
+        run: make push-dh

@@ -1,0 +1,8 @@
+version: "3.0"
+
+services:
+  verify-github-actions:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    image: verify-github-actions
