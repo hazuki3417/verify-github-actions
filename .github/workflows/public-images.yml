@@ -9,7 +9,7 @@ on:
         required: true
 
 jobs:
-  build:
+  publish-dh:
     runs-on: ubuntu-latest
     env:
       BASE_BRANCH: main
@@ -29,10 +29,38 @@ jobs:
         run: make build
 
       - name: Set image tag
-        run: make set-tag
+        run: make set-tag-dh -e RELEASE_VERSION=${{ github.event.inputs.version }}
 
       - name: Login Docker Hub
         run: make login-dh
 
       - name: Push Docker Hub Registry
-        run: make push-dh
+        run: make push-dh -e RELEASE_VERSION=${{ github.event.inputs.version }}
+
+  publish-ghcr:
+    runs-on: ubuntu-latest
+    env:
+      BASE_BRANCH: main
+
+    steps:
+        # セマンティックバージョンのフォーマット検証（簡易版）
+        # 厳密なものは下記のサイトの正規表現で行うこと
+        # https://semver.org/
+      - name: Verify semver
+        run:  echo "${{ github.event.inputs.version }}" | grep -e ^\[0-9\]\\+.\[0-9\]\\+.\[0-9\]\\+$
+
+      - uses: actions/checkout@v2
+        with:
+          ref: ${{ env.BASE_BRANCH }}
+
+      - name: Build images
+        run: make build
+
+      - name: Set image tag
+        run: make set-tag-ghcr -e RELEASE_VERSION=${{ github.event.inputs.version }}
+
+      - name: Login Docker Hub
+        run: make login-ghcr
+
+      - name: Push Docker Hub Registry
+        run: make push-ghcr -e RELEASE_VERSION=${{ github.event.inputs.version }}
