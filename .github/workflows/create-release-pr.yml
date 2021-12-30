@@ -11,8 +11,7 @@ jobs:
   create-release-pr:
     runs-on: ubuntu-latest
     env:
-      BASE_BRANCH: develop
-      TARGET_BRANCH: main
+      BASE_BRANCH: main
 
     steps:
         # セマンティックバージョンのフォーマット検証（簡易版）
