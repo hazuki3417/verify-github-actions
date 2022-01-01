@@ -13,3 +13,7 @@ jobs:
 
       - name: Run a one-line script
         run: echo Hello, world! release event
+
+      - name: Check release version
+        run: echo ${{ github.event.release.tag_name }}
+
